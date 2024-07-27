@@ -1,6 +1,7 @@
 # --- EPSG-REF ---
 
-EPSG-REF is the best solution to maps, cartography, and finding locations similar to Plus Codes from Google.<br>
+EPSG-REF is a co-ordinate reference system using EPSG numbers. It is excellent for Land Surveying,<br>
+Map Orientation, Navigation, and finding location points similar to Plus Codes from Google.<br>
 <br>
 Here is an example of using EPSG-REFs. This is at the Royal Observatory in Greenwich, South-East London:<br>
 <br>
