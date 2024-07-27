@@ -1,0 +1,153 @@
+EPSG-REF is a co-ordinate reference system using EPSG numbers. It is excellent for Land Surveying,
+Map Orientation, Navigation, and finding location points similar to Plus Codes from Google.
+
+The format to using EPSG-REF is this:
+
+  EPSG:<n>: <x> <y> <z>
+
+<n> --- EPSG number to use
+<x> --- X Co-ordinates (usually Eastings)
+<y> --- Y Co-ordinates (usually Northings)
+<z> --- Z (Altitude or Height - This is optional, and will depend on the EPSG number that is used)
+
+The EPSG:<n>: <x> <y> <z> are separated by whitespaces, usually [SPACE] or [TAB].
+
+------------------------------------------------------------
+
+Most places in the world will have more than one EPSG number. Here is an example of some EPSG-REFs from
+The Royal Observatory in Greenwich, London:
+
+EPSG:4326: 51.477811 -0.001475  (WGS84 lat-Long)
+EPSG:32630: 708216 5707226      (WGS84 UTM Zone 30N)
+EPSG:32631: 291580 5707234      (WGS84 UTM Zone 31N)
+EPSG:27700: 538885 177322       (OSGB36 Great Britain)
+EPSG:4277: 51.477295 0.000145   (OSGB36 lat-Long)
+EPSG:7405: 538885 177322 45     (OSGB36 + ODN Height)
+EPSG:25830: 708216 5707226      (ETRS89 UTM Zone 30N)
+EPSG:3042: 5707226 708216       (ETRS89 UTM Zone 30N (N-E))
+EPSG:8857: -115 6133426         (Equal Earth Greenwich)
+EPSG:8858: 7032899 6133426      (Equal Earth Americas)
+EPSG:8859: -11721806 6133426    (Equal Earth Asia-Pacific)
+
+------------------------------------------------------------
+
+If you are using Proj, there is a tool named cs2cs that will convert EPSG numbers.
+
+To convert EPSG:4326 (WGS84 Lat,Long) to EPSG:27700 (OSGB36) simply do this:
+
+$ echo "51.477811 -0.001475" | cs2cs EPSG:4326 EPSG:27700
+
+You should see <x> <y> and <z> displayed like this:
+
+538884.86	177321.58 0.00
+
+
+And to convert back to EPSG:4326 (WGS84 Lat,Long):
+
+$ echo "538885 177322" | cs2cs EPSG:27700 EPSG:4326 -d 6
+
+51.477811	-0.001475 0.000000
+
+
+------------------------------------------------------------
+
+Although <x> and <y> usually refer to Eastings and Northings, this is not always the case for some
+EPSG numbers. For example EPSG:3042 (ETRS89 UTM Zone 30N (N-E)) has Northings before Eastings, and
+some other EPSG numbers have Westings and Southings!
+
+You should also be aware that some GIS software programs have only accepted <x> as Eastings and <y> as
+Northings, and nothing else is allowed. A good example of this is if EPSG:25830 and EPSG:3042 display
+the same co-ordinates. This is technically wrong, and you may have to do an X,Y Axis swap.
+
+------------------------------------------------------------
+
+Here is a list of some EPSG numbers:
+
+EPSG:4326 --- WGS84
+EPSG:3857 --- Web Mercator
+EPSG:32601 to EPSG:32660 --- WGS84 UTM Zones 1N to 60N
+EPSG:32701 to EPSG:32760 --- WGS84 UTM Zones 1S to 60S
+EPSG:5041 --- WGS84 UPS North
+EPSG:5042 --- WGS84 UPS South
+EPSG:8857 --- Equal Earth Greenwich
+EPSG:8858 --- Equal Earth Americas
+EPSG:8859 --- Equal Earth Asia-Pacific
+
+EPSG:26901 to EPSG:26923 --- NAD83 UTM Zones 1N to 23N (USA and Canada)
+EPSG:25828 to EPSG:25837 --- ETRS89 UTM Zones 28N to 37N (Europe)
+EPSG:27700 --- OSGB36 (Great Britain)
+EPSG:2157 --- IRENET95 / ITM (Ireland)
+EPSG:2056 --- CH1903+ / LV95 (Switzerland)
+EPSG:31965 to EPSG:31976 --- SIRGAS 2000 UTM Zones 11N to 22N (Central and South America)
+EPSG:31977 to EPSG:31985 --- SIRGAS 2000 UTM Zones 17S to 25S (South America)
+EPSG:2046 to EPSG:2055 --- Hartebeesthoek94 Lo15 to Lo33 (South Africa)
+EPSG:2461 to EPSG:2698 --- Pulkovo 1995 / 3-degree Gauss-Kruger Zones 7 to 64 (Russia)
+EPSG:6669 to EPSG:6687 --- JGD2011 / Japan Plane Rectangular CS I to XIX (Japan)
+EPSG:3414 --- SVY21 / Singapore TM (Singapore)
+EPSG:7846 to EPSG:7859 --- GDA2020 MGA Zones 46 to 59 (Australia)
+EPSG:2133 to EPSG:2135 --- NZGD2000 UTM Zones 58S to 60S (New Zealand)
+
+NOTE: There are many more EPSG numbers, and there are far too many to list here.
+
+------------------------------------------------------------
+
+Finally, just as a matter of interest, here are some other map references from the
+Royal Observatory Greenwich for you to explore:
+
+Mapcodes:
+
+VHGR7.X3LY
+GBR L1.Q8Z
+GBR KGQ.6GT
+GBR VSBS.HNZ
+
+GBR Λ1.488Ζ
+GBR Л1.Ф8Б
+GBR ش1.488و
+GBR ㄍ1.ㄖ8ㄙ
+-----------------------
+Geohash:
+
+gcpuzgnzvxkp
+-----------------------
+MGRS:
+
+30U YC 08216 07226
+-----------------------
+Plus Code:
+
+9C3XFXHX+4C
+-----------------------
+H3 Resolution 15:
+
+8f194ad23074aca
+-----------------------
+3Geonames and Geocode.xyz:
+
+LONDON-SYLACAUGA-GARINII
+89N4AVHQ7L
+LONDON-6PUWYS1
+LONDON-JNTAD
+3154699784135
+-----------------------
+Fixphrase:
+
+cringe magnetic stoppage version
+-----------------------
+Wherewords.id:
+
+bishop rummy patent hercules
+-----------------------
+What3Words:
+
+///elbow.blaze.allow
+///clocher.miroitement.fermer
+///solange.sehnen.abbilden
+///huevo.mítica.indique
+///cadente.sedersi.denti
+///koralik.orzech.polana
+///купівля.обсяги.яєчний
+///自動.外勤.燃油
+///自动.外勤.燃油
+----------------------
+
