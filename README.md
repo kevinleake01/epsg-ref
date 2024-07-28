@@ -1,4 +1,4 @@
-# --- EPSG-REF ---
+# EPSG-REF
 
 EPSG-REF is a co-ordinate reference system using EPSG numbers. It is excellent for Land Surveying,<br>
 Map Orientation, Navigation, and finding location points similar to Plus Codes from Google.<br>
@@ -15,10 +15,14 @@ and the third (EPSG:32630) is WGS84 UTM Zone 30N.<br>
 The Geoid, Datum, and Projection systems used in maps and cartography are solved by the EPSG numbers,<br>
 and you do not have to worry about them.<br>
 <br>
-Here is a list of some EPSG Numbers that can be used:<br>
+-----------------------------<br>
+Here is a list of some EPSG Numbers:<br>
 <br>
 EPSG:4326 --- WGS84<br>
 EPSG:3857 --- Web Mercator<br>
+EPSG:8857 --- Equal Earth Greenwich<br>
+EPSG:8858 --- Equal Earth Americas<br>
+EPSG:8859 --- Equal Earth Asia-Pacific<br>
 EPSG:32601 to EPSG:32660 --- WGS84 UTM Zones 1N to 60N<br>
 EPSG:32701 to EPSG:32760 --- WGS84 UTM Zones 1S to 60S<br>
 EPSG:5041 --- WGS84 UPS North<br>
@@ -29,7 +33,12 @@ EPSG:25828 to EPSG:25837 --- ETRS89 UTM Zones 28N to 37N (Europe)<br>
 EPSG:27700 --- OSGB36 (Great Britain)<br>
 EPSG:2157 --- IRENET95 / ITM (Ireland)<br>
 EPSG:2056 --- CH1903+ / LV95 (Switzerland)<br>
+EPSG:31965 to EPSG:31976 --- SIRGAS 2000 UTM Zones 11N to 22N (Central and South America)<br>
+EPSG:31977 to EPSG:31985 --- SIRGAS 2000 UTM Zones 17S to 25S (South America)<br>
 EPSG:2046 to EPSG:2055 --- Hartebeesthoek94 Lo15 to Lo33 (South Africa)<br>
+EPSG:2641 to EPSG:2698 --- Pulkovo 1995 / 3-degree Gauss-Kruger Zones 7 to 64 (Russia)<br>
+EPSG:6669 to EPSG:6687 --- JGD2011 / Japan Plane Rectangular CS I to XIX (Japan)<br>
+EPSG:3414 --- SVY21 / Singapore TM (Singapore)<br>
 EPSG:7846 to EPSG:7859 --- GDA2020 MGA Zones 46 to 59 (Australia)<br>
 EPSG:2133 to EPSG:2135 --- NZGD2000 UTM Zones 58S to 60S (New Zealand)<br>
 <br>

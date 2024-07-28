@@ -65,13 +65,13 @@ Here is a list of some EPSG numbers:
 
 EPSG:4326 --- WGS84
 EPSG:3857 --- Web Mercator
+EPSG:8857 --- Equal Earth Greenwich
+EPSG:8858 --- Equal Earth Americas
+EPSG:8859 --- Equal Earth Asia-Pacific
 EPSG:32601 to EPSG:32660 --- WGS84 UTM Zones 1N to 60N
 EPSG:32701 to EPSG:32760 --- WGS84 UTM Zones 1S to 60S
 EPSG:5041 --- WGS84 UPS North
 EPSG:5042 --- WGS84 UPS South
-EPSG:8857 --- Equal Earth Greenwich
-EPSG:8858 --- Equal Earth Americas
-EPSG:8859 --- Equal Earth Asia-Pacific
 
 EPSG:26901 to EPSG:26923 --- NAD83 UTM Zones 1N to 23N (USA and Canada)
 EPSG:25828 to EPSG:25837 --- ETRS89 UTM Zones 28N to 37N (Europe)
@@ -81,7 +81,7 @@ EPSG:2056 --- CH1903+ / LV95 (Switzerland)
 EPSG:31965 to EPSG:31976 --- SIRGAS 2000 UTM Zones 11N to 22N (Central and South America)
 EPSG:31977 to EPSG:31985 --- SIRGAS 2000 UTM Zones 17S to 25S (South America)
 EPSG:2046 to EPSG:2055 --- Hartebeesthoek94 Lo15 to Lo33 (South Africa)
-EPSG:2461 to EPSG:2698 --- Pulkovo 1995 / 3-degree Gauss-Kruger Zones 7 to 64 (Russia)
+EPSG:2641 to EPSG:2698 --- Pulkovo 1995 / 3-degree Gauss-Kruger Zones 7 to 64 (Russia)
 EPSG:6669 to EPSG:6687 --- JGD2011 / Japan Plane Rectangular CS I to XIX (Japan)
 EPSG:3414 --- SVY21 / Singapore TM (Singapore)
 EPSG:7846 to EPSG:7859 --- GDA2020 MGA Zones 46 to 59 (Australia)
