@@ -20,9 +20,6 @@ Here is a list of some EPSG Numbers:<br>
 <br>
 EPSG:4326 --- WGS84<br>
 EPSG:3857 --- Web Mercator<br>
-EPSG:8857 --- Equal Earth Greenwich<br>
-EPSG:8858 --- Equal Earth Americas<br>
-EPSG:8859 --- Equal Earth Asia-Pacific<br>
 EPSG:32601 to EPSG:32660 --- WGS84 UTM Zones 1N to 60N<br>
 EPSG:32701 to EPSG:32760 --- WGS84 UTM Zones 1S to 60S<br>
 EPSG:5041 --- WGS84 UPS North<br>
@@ -59,6 +56,7 @@ Website links:<br>
 <br>
 https://epsg.org<br>
 https://epsg.io<br>
+https://crs-explorer.proj.org/<br>
 https://www.spatialreference.org/ref<br>
 <br>
 -----------------------------<br>
