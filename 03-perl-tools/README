@@ -1,0 +1,22 @@
+----- 03-perl-tools -----
+
+Here are a selection of programs written in Perl.
+
+You will need to have Perl installed on your computer, and in Perl there is a program called cpan. From cpan,
+you then install another program called App::cpanminus which makes installing Perl modules easy:
+
+$ sudo cpan App::cpanminus
+
+For more information about installing cpan modules see:
+
+https://www.cpan.org/modules/INSTALL.html
+
+-----------------------------------------------------
+The programs listed here are:
+
+GeoCodeXYZ.pl --- 3Geonames and Geocode.xyz
+GeoHash.pl --- Geohash
+GeoOLC.pl --- Plus Codes
+
+The default values have been set to the Royal Greenwich Observatory in London, UK. You will have to edit the
+files directly to change the location.

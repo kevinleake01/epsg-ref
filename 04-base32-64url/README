@@ -1,0 +1,30 @@
+-------------------------------------
+EPSG-REF-BASE32 and EPSG-REF-BASE64URL
+-------------------------------------
+
+EPSG-REF-BASE32 and EPSG-REF-BASE64URL are simply EPSG-REFs encoded in Base32 and Base64url respectively. This can
+be used if you want to have your EPSG-REFs in an URL safe way such as website addresses, and it can also be used
+as an alternative geocoding method to Geohash, Mapcode, Plus Codes, and H3.
+
+To encode an EPSG-REF from the Royal Observatory in Greenwich, London, into Base32 do this:
+
+$ echo "EPSG:27700: 538885 177327" | basenc --base32
+
+and for base64url do this:
+
+$ echo "EPSG:27700: 538885 177327" | basenc --base64url
+
+The results for EPSG-REF-BASE32 is:
+
+IVIFGRZ2GI3TOMBQHIQDKMZYHA4DKIBRG43TGMRXBI======
+
+And for EPSG-REF-BASE64URL:
+
+RVBTRzoyNzcwMDogNTM4ODg1IDE3NzMyNwo=
+
+
+To get them back to original EPSG-REFs, do this:
+
+$ echo "IVIFGRZ2GI3TOMBQHIQDKMZYHA4DKIBRG43TGMRXBI======" | basenc -d --base32
+$ echo "RVBTRzoyNzcwMDogNTM4ODg1IDE3NzMyNwo=" | basenc -d --base64url
+
