@@ -55,7 +55,7 @@ $ git clone https://github.com/mapcode-foundation/mapcode-cpp<br>
 $ cd mapcode-cpp/mapcodelib<br>
 $ gcc -O -c mapcoder.c<br>
 $ cd ../utility<br>
-$ gcc -O mapcode.cpp -o mapcode ../mapcodelib/mapcoder.o<br>
+$ gcc -O mapcode.cpp -lm -o mapcode ../mapcodelib/mapcoder.o<br>
 <br>
 Mapcode only allows convertion from WGS84 Lat-Long (EPSG:4326) to Mapcodes, which means that we will have to<br>
 convert the appropriate EPSG number into EPSG:4326. Here is an example from the Ordinance Survey of Great<br>
