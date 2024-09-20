@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" >
+<title>EPSG to Plus Codes</title>
+<style>
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: monospace;
+}
+h1 {
+  background-color: #585858;
+  color: #FFFFFF;
+}
+h2 {
+  background-color: #585858;
+  color: #FFFFFF;
+}
+a:link {
+  color: #FF0000;
+}
+a:visited {
+  color: #00FF00;
+}
+</style>
+</head>
+<body>
+<h1>EPSG to Plus codes</h1>
+<h2>Plus Code website links</h2>
+<p>
+<a href="https://maps.google.com/pluscodes/">MAIN WEBSITE</a><br>
+<a href="https://github.com/google/open-location-code">Github</a><br>
+<a href="https://plus.codes/map">Plus Codes Map</a><br>
+<a href="https://www.google.com/maps">Google Maps</a><br>
+<a href="https://www.dcode.fr/open-location-code">Dcode.fr: Open Location Plus Codes</a><br>
+<a href="https://en.wikipedia.org/wiki/Open_Location_Code">Wikipedia: Open Location Code</a><br>
+</p>
+<h2>Using Plus Codes</h2>
+<p>
+Plus Codes only allows convertion from WGS84 Lat-Long (EPSG:4326) to Plus Codes, which means that we will have to<br>
+convert the appropriate EPSG number into EPSG:4326. Here is an example from the Ordinance Survey of Great<br>
+Britain Headquarters in Southampton, UK, located at:<br>
+<br>
+EPSG:27700: 437145 115567<br>
+<br>
+First, Convert EPSG:27700 to EPSG:4326 using cs2cs from proj:<br>
+<br>
+$ echo "437145 115567" | cs2cs EPSG:27700 EPSG:4326 -d 6<br>
+50.938357	-1.472726 0.000000<br>
+<br>
+Now we convert this to Plus Codes by doing this:<br>
+<br>
+<a href="https://plus.codes/api?address=50.938357,-1.472726">https://plus.codes/api?address=50.938357,-1.472726</a><br>
+<br>
+You should see something like this:<br>
+<pre>
+{
+  "plus_code": {
+    "global_code": "9C2WWGQG+8W",
+    "geometry": {
+      "bounds": {
+        "northeast": {
+          "lat": 50.93837500000001,
+          "lng": -1.4726249999999936
+        },
+        "southwest": {
+          "lat": 50.93825000000001,
+          "lng": -1.4727499999999907
+        }
+      },
+      "location": {
+        "lat": 50.93831250000001,
+        "lng": -1.4726874999999922
+      }
+    },
+    "locality": {}
+  },
+  "status": "OK"
+}
+</pre>
+The Plus Code for this location is 9C2WWGQG+8W<br>
+<br>
+---------------------------------<br>
+We will now convert back to WGS84 Lat-Long (EPSG:4326) by doing this:<br>
+<br>
+<a href="https://plus.codes/api?address=9C2WWGQG%2B8W">https://plus.codes/api?address=9C2WWGQG%2B8W</a><br>
+<br>
+The result is similar to that shown above, with the location shown as:<br>
+<pre>
+      "location": {
+        "lat": 50.93831250000001,
+        "lng": -1.4726874999999922
+      }
+</pre>
+<br>
+And So, finally back to EPSG:27700:<br>
+<br>
+$ echo "50.93831250000001 -1.4726874999999922" | cs2cs EPSG:4326 EPSG:27700<br>
+437147.73	115562.09 0.00<br>
+<br>
+EPSG:27700: 437148 115562<br>
+<br>
+---------------------------------<br>
+NOTE: There is also a perl program called GeoOLC.pl, and you can find it<br>
+in the 03-perl-tools directory.<br>
+---------------------------------<br>
+</p>
+</body>
+</html>

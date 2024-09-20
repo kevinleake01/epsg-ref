@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" >
+<title>EPSG to H3</title>
+<style>
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: monospace;
+}
+h1 {
+  background-color: #585858;
+  color: #FFFFFF;
+}
+h2 {
+  background-color: #585858;
+  color: #FFFFFF;
+}
+a:link {
+  color: #FF0000;
+}
+a:visited {
+  color: #00FF00;
+}
+</style>
+</head>
+<body>
+<h1>EPSG to H3</h1>
+<h2>H3 website links</h2>
+<a href="https://h3geo.org/">MAIN WEBSITE</a><br>
+<a href="https://github.com/uber/h3">Github</a><br>
+<a href="https://h3geo.org/docs/">Documentation</a><br>
+<a href="https://h3geo.org/docs/api/indexing">Indexing Functions</a><br>
+<a href="https://wolf-h3-viewer.glitch.me/">H3 Viewer Map</a><br>
+<a href="https://github.com/clupasq/h3-viewer">H3 Viewer Map on Github</a><br>
+<p>
+</p>
+<h2>Using H3</h2>
+<p>
+EPSG to H3 will convert EPSG-REF to H3. First of all, we will install the program by doing this:<br>
+<br>
+$ git clone https://github.com/uber/h3<br>
+$ cd h3<br>
+$ mkdir build<br>
+$ cd build<br>
+$ cmake ..<br>
+$ make<br>
+<br>
+H3 only allows convertion from WGS84 Lat-Long (EPSG:4326) to H3s, which means that we will have to<br>
+convert the appropriate EPSG number into EPSG:4326. Here is an example from the Ordinance Survey of Great<br>
+Britain Headquarters in Southampton, UK, located at:<br>
+<br>
+EPSG:27700: 437145 115567<br>
+<br>
+First, Convert EPSG:27700 to EPSG:4326 using cs2cs from proj:<br>
+<br>
+$ echo "437145 115567" | cs2cs EPSG:27700 EPSG:4326 -d 6<br>
+50.938357	-1.472726 0.000000<br>
+<br>
+Next, go to the build directory of H3, to convert to H3:<br>
+<br>
+$ ./bin/latLngToCell --resolution 15 --latitude 50.938357 --longitude -1.472726<br>
+or<br>
+$ ./bin/latLngToCell -r 15 --lat 50.938357 --lng -1.472726<br>
+8f195911b866064<br>
+<br>
+The H3 code for this location is 8f195911b866064<br>
+<br>
+---------------------------------<br>
+We will now convert back to WGS84 Lat-Long (EPSG:4326) by doing this:<br>
+<br>
+$ ./bin/cellToLatLng --index 8f195911b866064<br>
+or<br>
+$ ./bin/cellToLatLng -i 8f195911b866064<br>
+50.938353159693364 -1.47272491510097<br>
+<br>
+And finally back to EPSG:27700:<br>
+<br>
+$ echo "50.938353159693364 -1.47272491510097" | cs2cs EPSG:4326 EPSG:27700<br>
+437145.07	115566.59 0.00<br>
+<br>
+EPSG:27700: 437145 115567<br>
+<br>
+---------------------------------<br>
+</p>
+</body>
+</html>
