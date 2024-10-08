@@ -87,8 +87,8 @@ YZ4LT.J1FN
 -----------------------------
 Amundsen-Scott South Pole Station:
 
-ESPG:5042: 2000000 2000000
-ESPG:3031: 0 0
+EPSG:5042: 2000000 2000000
+EPSG:3031: 0 0
 EPSG:27702: 3714267 3402017
 
 ATA ZZ.ZZ

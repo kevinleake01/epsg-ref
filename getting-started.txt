@@ -1,5 +1,6 @@
 EPSG-REF is a co-ordinate reference system using EPSG numbers. It is excellent for Land Surveying,
-Map Orientation, Navigation, and finding location points similar to Plus Codes from Google.
+Map Orientation, Navigation, and finding location points similar to Geohash, Mapcode, MGRS,
+Plus Codes, and H3.
 
 The format to using EPSG-REF is this:
 

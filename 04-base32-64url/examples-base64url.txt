@@ -1,0 +1,35 @@
+Festplassen, Bergen, Norway:
+
+EPSG:25832: 297573 6700603
+
+RVBTRzoyNTgzMjogMjk3NTczIDY3MDA2MDM
+
+-----------------------------
+Zurich Hauptbahnhof, Switzerland:
+
+EPSG:2056: 2683124 1248067
+
+RVBTRzoyMDU2OiAyNjgzMTI0IDEyNDgwNjc
+
+-----------------------------
+Arvika, Sweden:
+
+EPSG:3006: 6615379 364287
+
+RVBTRzozMDA2OiA2NjE1Mzc5IDM2NDI4Nw
+
+-----------------------------
+Manly Beach, Sydney, NSW, Australia:
+
+EPSG:7856: 341527 6259020
+
+RVBTRzo3ODU2OiAzNDE1MjcgNjI1OTAyMA
+
+----------------------------
+Rosarito Beach Hotel, Rosarito, Baja California:
+
+EPSG:6366: 494825 3577661
+
+RVBTRzo2MzY2OiA0OTQ4MjUgMzU3NzY2MQ
+
+----------------------------

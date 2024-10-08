@@ -1,0 +1,35 @@
+Festplassen, Bergen, Norway:
+
+EPSG:25832: 297573 6700603
+
+IVIFGRZ2GI2TQMZSHIQDEOJXGU3TGIBWG4YDANRQGM======
+
+-----------------------------
+Zurich Hauptbahnhof, Switzerland:
+
+EPSG:2056: 2683124 1248067
+
+IVIFGRZ2GIYDKNR2EAZDMOBTGEZDIIBRGI2DQMBWG4======
+
+-----------------------------
+Singapore Changi Airport:
+
+EPSG:3414: 37732 45259
+
+IVIFGRZ2GM2DCNB2EAZTONZTGIQDINJSGU4Q====
+
+-----------------------------
+Ten Bel, Tenerife:
+
+EPSG:4083: 337481 3099445
+
+IVIFGRZ2GQYDQMZ2EAZTGNZUHAYSAMZQHE4TINBV
+
+-----------------------------
+Santa Maria, Sal, Cape Verde:
+
+EPSG:4826: 278145 213400
+
+IVIFGRZ2GQ4DENR2EAZDOOBRGQ2SAMRRGM2DAMA=
+
+-----------------------------

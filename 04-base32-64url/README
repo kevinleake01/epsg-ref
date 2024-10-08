@@ -28,3 +28,22 @@ To get them back to original EPSG-REFs, do this:
 $ echo "IVIFGRZ2GI3TOMBQHIQDKMZYHA4DKIBRG43TGMRXBI======" | basenc -d --base32
 $ echo "RVBTRzoyNzcwMDogNTM4ODg1IDE3NzMyNwo=" | basenc -d --base64url
 
+-------------------------------------
+
+NOTE: You may have noticed that there may be padding "=" at the end of base32 and base64url encoded EPSG-REFs.
+The best way to get rid of this, is by putting extra space characters at the end of the original EPSG-REFs. Here
+are some examples:
+
+$ echo "EPSG:27700: 538885 177327    " | basenc --base32
+
+IVIFGRZ2GI3TOMBQHIQDKMZYHA4DKIBRG43TGMRXEAQCAIAK
+
+$ echo "EPSG:27700: 538885 177327 " | basenc --base64url
+
+RVBTRzoyNzcwMDogNTM4ODg1IDE3NzMyNyAK
+
+------------------------------------
+
+
+
+

@@ -1,0 +1,71 @@
+Here are some examples of EPSG-REFs written in an URL and filename safe way. This is done by
+removing the colons ":" and replacing spaces with underscores "_" to make them suitable for
+URLs and filenames.
+
+NOTE: Although negative numbers are OK, numbers with decimal points "." cannot be used here,
+and you must use Base32 or Base64url for those EPSG-REFs.
+
+-----------------------------
+Festplassen, Bergen, Norway:
+
+epsg25831_628193_6697220
+epsg25832_297573_6700603
+epsg3044_6700603_297573
+epsg3575_-266268_-3256854
+epsg10596_-803146_686080
+-----------------------------
+Zurich Hauptbahnhof, Switzerland:
+
+epsg2056_2683124_1248067
+epsg32632_465226_5247295
+-----------------------------
+Ala Moana Beach, Honolulu, Hawaii:
+
+epsg26963_515715_13599
+epsg10598_-5631558_-1042610
+-----------------------------
+Washington Monument, DC, USA:
+
+epsg32618_323482_4306480
+epsg32146_3627072_2136745
+epsg26985_396941_135737
+-----------------------------
+Singapore Changi Airport:
+
+epsg3414_37732_45259
+-----------------------------
+Arvika, Sweden:
+
+epsg3006_6615379_364287
+-----------------------------
+Santa Maria, Sal, Cape Verde:
+
+epsg4826_278145_213400
+epsg3408_-2964282_-7014808
+epsg3410_-2206036_2101494
+-----------------------------
+Greenmarket Square, Cape Town, South Africa:
+
+epsg2048_53626_3755240
+epsg9221_843879_796553
+epsg10592_-154926_-4225982
+-----------------------------
+Manly Beach, Sydney, NSW, Australia:
+
+epsg7856_341527_6259020
+epsg8058_9696625_4431231
+-----------------------------
+Aquamarine Resort, Akshi, Kazakhstan:
+
+epsg2504_5091246_544098
+-----------------------------
+Pevek, Chukotka:
+
+epsg2519_7736064_471673
+epsg5940_4067689_1047757
+-----------------------------
+Amundsen-Scott South Pole Station:
+
+epsg5042_2000000_2000000
+epsg3031_0_0
+-----------------------------
