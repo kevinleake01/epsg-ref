@@ -49,22 +49,22 @@ $ make<br>
 $ cd tools<br>
 <br>
 We are now ready to use GeoConvert. Here are some examples from the Royal Observatory<br>
-in Greenwich, located at EPSG:4326: 50.938357 -1.472726<br>
+in Greenwich, located at EPSG:4326: 51.477811 -0.001475<br>
 <br>
-To convert to UTM: (EPSG:32630: 607308 5644081)<br>
-$ ./GeoConvert -u --input-string "50.938357 -1.472726"<br>
-30n 607308 5644081<br>
+To convert to UTM: (EPSG:32630: 708216 5707226)<br>
+$ ./GeoConvert -u --input-string "51.477811 -0.001475"<br>
+30n 708216 5707226<br>
 <br>
 To convert to MGRS:<br>
-$ ./GeoConvert -m --input-string "50.938357 -1.472726"<br>
-30UXB0730744080<br>
+$ ./GeoConvert -m --input-string "51.477811 -0.001475"<br>
+30UYC0821507225<br>
 <br>
 To convert back to Lat-Long:<br>
-$ ./GeoConvert -g --input-string "30n 607308 5644081"<br>
-50.93836 -1.47272<br>
+$ ./GeoConvert -g --input-string "30n 708216 5707226"<br>
+51.47781 -0.00147<br>
 <br>
-$ ./GeoConvert -g --input-string "30UXB0730744080"<br>
-50.93836 -1.47273<br>
+$ ./GeoConvert -g --input-string "30UYC0821507225"<br>
+51.47781 -0.00148<br>
 <br>
 </p>
 </body>
