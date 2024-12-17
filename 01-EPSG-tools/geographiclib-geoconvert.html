@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" >
+<title>GeographicLib-GeoConvert</title>
+<style>
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: monospace;
+}
+h1 {
+  background-color: #585858;
+  color: #FFFFFF;
+}
+h2 {
+  background-color: #585858;
+  color: #FFFFFF;
+}
+a:link {
+  color: #FF0000;
+}
+a:visited {
+  color: #00FF00;
+}
+</style>
+</head>
+<body>
+<h1>GeographicLib-GeoConvert</h1>
+<h2>GeoConvert website links</h2>
+<p>
+<a href="https://geographiclib.sourceforge.io/cgi-bin/GeoConvert">GeoConvert Online Utility</a><br>
+<a href="https://geographiclib.sourceforge.io/C++/doc/GeoConvert.1.html">GeoConvert Man Page</a><br>
+<a href="https://geographiclib.sourceforge.io/C++/doc/">GeographicLib Documentation</a><br>
+<a href="https://geographiclib.sourceforge.io/C++/">GeographicLib C++ Library</a><br>
+<a href="https://github.com/geographiclib/geographiclib">Github</a><br>
+</p>
+<h2>Using GeoConvert</h2>
+<p>
+GeoConvert is a tool from GeographicLib that converts between WGS84 Lat-Long, UTM/UPS, and MGRS.<br>
+To get started, we will now install GeographicLib:<br>
+<br>
+$ git clone https://github.com/geographiclib/geographiclib<br>
+$ cd geographiclib<br>
+$ mkdir BUILD<br>
+$ cd BUILD<br>
+$ cmake ..<br>
+$ make<br>
+$ cd tools<br>
+<br>
+We are now ready to use GeoConvert. Here are some examples from the Royal Observatory<br>
+in Greenwich, located at EPSG:4326: 50.938357 -1.472726<br>
+<br>
+To convert to UTM: (EPSG:32630: 607308 5644081)<br>
+$ ./GeoConvert -u --input-string "50.938357 -1.472726"<br>
+30n 607308 5644081<br>
+<br>
+To convert to MGRS:<br>
+$ ./GeoConvert -m --input-string "50.938357 -1.472726"<br>
+30UXB0730744080<br>
+<br>
+To convert back to Lat-Long:<br>
+$ ./GeoConvert -g --input-string "30n 607308 5644081"<br>
+50.93836 -1.47272<br>
+<br>
+$ ./GeoConvert -g --input-string "30UXB0730744080"<br>
+50.93836 -1.47273<br>
+<br>
+</p>
+</body>
+</html>
