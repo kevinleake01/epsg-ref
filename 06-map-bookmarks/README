@@ -1,0 +1,10 @@
+----- 06-MAP-BOOKMARKS -----
+
+Here are some Map Bookmarks to save your favourite locations. The list
+of bookmarks is as follows:
+
+map-bookmarks-0001.c  -- Latitude and Longitude (Decimal)
+map-bookmarks-0002.c  -- Mapcodes
+map-bookmarks-0003.c  -- MGRS
+map-bookmarks-0004.c  -- Open Location Plus codes (Google)
+
