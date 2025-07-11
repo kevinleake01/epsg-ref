@@ -3,8 +3,25 @@
 Here are some Map Bookmarks to save your favourite locations. The list
 of bookmarks is as follows:
 
-map-bookmarks-0001.c  -- Latitude and Longitude (Decimal)
-map-bookmarks-0002.c  -- Mapcodes
-map-bookmarks-0003.c  -- MGRS
-map-bookmarks-0004.c  -- Open Location Plus codes (Google)
+  map-bookmarks-0001.c  -- Latitude and Longitude (Decimal)
+  map-bookmarks-0002.c  -- Mapcodes
+  map-bookmarks-0003.c  -- MGRS
+  map-bookmarks-0004.c  -- Open Location Plus codes (Google)
+
+
+You can also do a batch processing of Map Bookmarks:
+
+  batch-0001.c  -- Latitude and Longitude (Decimal)
+  batch-0002.c  -- Mapcodes
+  batch-0003.c  -- MGRS
+  batch-0004.c  -- Open Location Plus codes (Google)
+
+These batch map-bookmarks have been predefined to compass points, but
+you can define your own set of batch map-bookmarks by editing the files
+below to suit your needs:
+
+  batch-custom-0001.c  -- Latitude and Longitude (Decimal)
+  batch-custom-0002.c  -- Mapcodes
+  batch-custom-0003.c  -- MGRS
+  batch-custom-0004.c  -- Open Location Plus codes (Google)
 
