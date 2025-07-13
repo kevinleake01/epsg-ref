@@ -17,8 +17,8 @@
 int main(int argc, char *argv[])
 {
   system("gcc map-bookmarks-0004.c -o a.out-1\n");
-  system("mkdir 00_0004_custom\n");
-  system("./a.out-1 6FG22222 22 \"Custom\" > 00_0004_custom/0004.html\n");
+  system("mkdir 0004_custom\n");
+  system("./a.out-1 6FG22222 22 \"Custom\" > 0004_custom/0004.html\n");
   system("rm a.out-1\n");
 }
 
