@@ -32,36 +32,6 @@ EPSG:8859: -11721806 6133426    (Equal Earth Asia-Pacific)
 
 ------------------------------------------------------------
 
-If you are using Proj, there is a tool named cs2cs that will convert EPSG numbers.
-
-To convert EPSG:4326 (WGS84 Lat,Long) to EPSG:27700 (OSGB36) simply do this:
-
-$ echo "51.477811 -0.001475" | cs2cs EPSG:4326 EPSG:27700
-
-You should see <x> <y> and <z> displayed like this:
-
-538884.86	177321.58 0.00
-
-
-And to convert back to EPSG:4326 (WGS84 Lat,Long):
-
-$ echo "538885 177322" | cs2cs EPSG:27700 EPSG:4326 -d 6
-
-51.477811	-0.001475 0.000000
-
-
-------------------------------------------------------------
-
-Although <x> and <y> usually refer to Eastings and Northings, this is not always the case for some
-EPSG numbers. For example EPSG:3042 (ETRS89 UTM Zone 30N (N-E)) has Northings before Eastings, and
-some other EPSG numbers have Westings and Southings!
-
-You should also be aware that some GIS software programs have only accepted <x> as Eastings and <y> as
-Northings, and nothing else is allowed. A good example of this is if EPSG:25830 and EPSG:3042 display
-the same co-ordinates. This is technically wrong, and you may have to do an X,Y Axis swap.
-
-------------------------------------------------------------
-
 Here is a list of some EPSG numbers:
 
 EPSG:4326 --- WGS84
@@ -89,6 +59,1650 @@ EPSG:7846 to EPSG:7859 --- GDA2020 MGA Zones 46 to 59 (Australia)
 EPSG:2133 to EPSG:2135 --- NZGD2000 UTM Zones 58S to 60S (New Zealand)
 
 NOTE: There are many more EPSG numbers, and there are far too many to list here.
+
+------------------------------------------------------------
+
+If you are using Proj, there is a tool named cs2cs that will convert EPSG numbers.
+
+To convert EPSG:4326 (WGS84 Lat,Long) to EPSG:27700 (OSGB36) simply do this:
+
+$ echo "51.477811 -0.001475" | cs2cs EPSG:4326 EPSG:27700
+
+You should see <x> <y> and <z> displayed like this:
+
+538884.86	177321.58 0.00
+
+
+And to convert back to EPSG:4326 (WGS84 Lat,Long):
+
+$ echo "538885 177322" | cs2cs EPSG:27700 EPSG:4326 -d 6
+
+51.477811	-0.001475 0.000000
+
+------------------------------------------------------------
+
+Although <x> and <y> usually refer to Eastings and Northings, this is not always the case for some
+EPSG numbers. For example EPSG:3042 (ETRS89 UTM Zone 30N (N-E)) has Northings before Eastings, and
+some other EPSG numbers have Westings and Southings!
+
+You should also be aware that some GIS software programs have only accepted <x> as Eastings and <y> as
+Northings, and nothing else is allowed. A good example of this is if EPSG:25830 and EPSG:3042 display
+the same co-ordinates. This is technically wrong, and you may have to do an X,Y Axis swap.
+
+------------------------------------------------------------
+
+You should install Proj-data, as this gives greater accuracy. Proj-data is used in Proj, Gdal, and QGIS.
+
+To download and install, do this:
+
+$ wget https://download.osgeo.org/proj/proj-data-x.x.tar.gz
+$ sudo tar -zxvf proj-data-x.x.tar.gz -C /usr/share/proj
+
+However, not all conversions or transformations are straightforward or available. A good idea is to use
+projinfo to see what is going on:
+
+$ projinfo -s epsg:4326 -t epsg:25830
+Candidate operations found: 1
+-------------------------------------
+Operation No. 1:
+
+unknown id, Inverse of ETRS89 to WGS 84 (1) + UTM zone 30N, 1 m, Europe - onshore and offshore: Albania; Andorra; Austria; Belgium; Bosnia and Herzegovina; Bulgaria; Croatia; Czechia; Denmark; Estonia; Faroe Islands; Finland; France; Germany; Gibraltar; Greece; Hungary; Ireland; Italy; Kosovo; Latvia; Liechtenstein; Lithuania; Luxembourg; Malta; Moldova; Monaco; Montenegro; Netherlands; North Macedonia; Norway including Svalbard and Jan Mayen; Poland; Portugal - mainland; Romania; San Marino; Serbia; Slovakia; Slovenia; Spain - mainland and Balearic islands; Sweden; Switzerland; United Kingdom (UK) including Channel Islands and Isle of Man; Vatican City State.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=utm +zone=30 +ellps=GRS80
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of ETRS89 to WGS 84 (1) + UTM zone 30N",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["ETRS89 / UTM zone 30N",
+            BASEGEOGCRS["ETRS89",
+                ENSEMBLE["European Terrestrial Reference System 1989 ensemble",
+                    MEMBER["European Terrestrial Reference Frame 1989"],
+                    MEMBER["European Terrestrial Reference Frame 1990"],
+                    MEMBER["European Terrestrial Reference Frame 1991"],
+                    MEMBER["European Terrestrial Reference Frame 1992"],
+                    MEMBER["European Terrestrial Reference Frame 1993"],
+                    MEMBER["European Terrestrial Reference Frame 1994"],
+                    MEMBER["European Terrestrial Reference Frame 1996"],
+                    MEMBER["European Terrestrial Reference Frame 1997"],
+                    MEMBER["European Terrestrial Reference Frame 2000"],
+                    MEMBER["European Terrestrial Reference Frame 2005"],
+                    MEMBER["European Terrestrial Reference Frame 2014"],
+                    MEMBER["European Terrestrial Reference Frame 2020"],
+                    ELLIPSOID["GRS 1980",6378137,298.257222101,
+                        LENGTHUNIT["metre",1]],
+                    ENSEMBLEACCURACY[0.1]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4258]],
+            CONVERSION["UTM zone 30N",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",0,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-3,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",500000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",0,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",25830]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of ETRS89 to WGS 84 (1)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["ETRS89",
+                    ENSEMBLE["European Terrestrial Reference System 1989 ensemble",
+                        MEMBER["European Terrestrial Reference Frame 1989"],
+                        MEMBER["European Terrestrial Reference Frame 1990"],
+                        MEMBER["European Terrestrial Reference Frame 1991"],
+                        MEMBER["European Terrestrial Reference Frame 1992"],
+                        MEMBER["European Terrestrial Reference Frame 1993"],
+                        MEMBER["European Terrestrial Reference Frame 1994"],
+                        MEMBER["European Terrestrial Reference Frame 1996"],
+                        MEMBER["European Terrestrial Reference Frame 1997"],
+                        MEMBER["European Terrestrial Reference Frame 2000"],
+                        MEMBER["European Terrestrial Reference Frame 2005"],
+                        MEMBER["European Terrestrial Reference Frame 2014"],
+                        MEMBER["European Terrestrial Reference Frame 2020"],
+                        ELLIPSOID["GRS 1980",6378137,298.257222101,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[0.1]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4258]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",0,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",0,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",0,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[1.0],
+            ID["INVERSE(EPSG)",1149],
+            REMARK["ETRS89 and WGS 84 are realizations of ITRS coincident to within 1 metre. This transformation has an accuracy equal to the coincidence figure."]]],
+    STEP[
+        CONVERSION["UTM zone 30N",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",0,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-3,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",500000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",0,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",16030]]],
+    OPERATIONACCURACY[1],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["Europe - onshore and offshore: Albania; Andorra; Austria; Belgium; Bosnia and Herzegovina; Bulgaria; Croatia; Czechia; Denmark; Estonia; Faroe Islands; Finland; France; Germany; Gibraltar; Greece; Hungary; Ireland; Italy; Kosovo; Latvia; Liechtenstein; Lithuania; Luxembourg; Malta; Moldova; Monaco; Montenegro; Netherlands; North Macedonia; Norway including Svalbard and Jan Mayen; Poland; Portugal - mainland; Romania; San Marino; Serbia; Slovakia; Slovenia; Spain - mainland and Balearic islands; Sweden; Switzerland; United Kingdom (UK) including Channel Islands and Isle of Man; Vatican City State."],
+        BBOX[33.26,-16.1,84.73,38.01]]]
+
+------------------------------------------------------------
+$ projinfo -s epsg:4326 -t epsg 27700 --spatial-test intersects
+Candidate operations found: 9
+-------------------------------------
+Operation No. 1:
+
+unknown id, Inverse of OSGB36 to WGS 84 (9) + British National Grid, 1 m, United Kingdom (UK) - offshore to boundary of UKCS within 49°45'N to 61°N and 9°W to 2°E; onshore Great Britain (England, Wales and Scotland). Isle of Man onshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +inv +proj=hgridshift +grids=uk_os_OSTN15_NTv2_OSGBtoETRS.tif
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (9) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (9)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Inverse of HORIZONTAL_SHIFT_GTIFF"],
+            PARAMETERFILE["Latitude and longitude difference file","uk_os_OSTN15_NTv2_OSGBtoETRS.tif"],
+            OPERATIONACCURACY[1.0],
+            ID["INVERSE(DERIVED_FROM(EPSG))",7710],
+            REMARK["Parameter values taken from OSGB36 to ETRS89 (2) (tfm code 7709) assuming that ETRS89 is coincident with WGS 84 within the accuracy of the tfm. Replaces OSGB36 to WGS 84 (7) (tfm code 5339)."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[1],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - offshore to boundary of UKCS within 49°45'N to 61°N and 9°W to 2°E; onshore Great Britain (England, Wales and Scotland). Isle of Man onshore."],
+        BBOX[49.75,-9.01,61.01,2.01]]]
+
+-------------------------------------
+Operation No. 2:
+
+unknown id, Inverse of OSGB36 to WGS 84 (6) + British National Grid, 2 m, United Kingdom (UK) - Great Britain - England and Wales onshore, Scotland onshore and Western Isles nearshore including Sea of the Hebrides and The Minch; Isle of Man onshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +inv +proj=helmert +x=446.448 +y=-125.157 +z=542.06 +rx=0.15 +ry=0.247
+        +rz=0.842 +s=-20.489 +convention=position_vector
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (6) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (6) (approx. inversion)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Position Vector transformation (geog2D domain)",
+                ID["EPSG",9606]],
+            PARAMETER["X-axis translation",-446.448,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",125.157,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-542.06,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            PARAMETER["X-axis rotation",-0.15,
+                ANGLEUNIT["arc-second",4.84813681109536E-06],
+                ID["EPSG",8608]],
+            PARAMETER["Y-axis rotation",-0.247,
+                ANGLEUNIT["arc-second",4.84813681109536E-06],
+                ID["EPSG",8609]],
+            PARAMETER["Z-axis rotation",-0.842,
+                ANGLEUNIT["arc-second",4.84813681109536E-06],
+                ID["EPSG",8610]],
+            PARAMETER["Scale difference",20.489,
+                SCALEUNIT["parts per million",1E-06],
+                ID["EPSG",8611]],
+            OPERATIONACCURACY[2.0],
+            ID["INVERSE(EPSG)",1314],
+            REMARK["Commonly referred to as the ""OSGB Petroleum transformation"". For a more accurate transformation see ETRS89 to OSGB36 / British National Grid (3) (code 7953)."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[2],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - Great Britain - England and Wales onshore, Scotland onshore and Western Isles nearshore including Sea of the Hebrides and The Minch; Isle of Man onshore."],
+        BBOX[49.79,-8.82,60.94,1.92]]]
+
+-------------------------------------
+Operation No. 3:
+
+unknown id, Inverse of OSGB36 to WGS 84 (1) + British National Grid, 21 m, United Kingdom (UK) - Great Britain - England and Wales onshore, Scotland onshore and Western Isles nearshore including Sea of the Hebrides and The Minch; Isle of Man onshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +proj=helmert +x=-375 +y=111 +z=-431
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (1) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (1)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",-375,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",111,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-431,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[21.0],
+            ID["INVERSE(EPSG)",1195],
+            REMARK["Derived at 38 stations. Accuracy 10m, 10m and 15m in X, Y and Z axes."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[21],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - Great Britain - England and Wales onshore, Scotland onshore and Western Isles nearshore including Sea of the Hebrides and The Minch; Isle of Man onshore."],
+        BBOX[49.79,-8.82,60.94,1.92]]]
+
+-------------------------------------
+Operation No. 4:
+
+unknown id, Inverse of OSGB36 to WGS 84 (2) + British National Grid, 10 m, United Kingdom (UK) - England onshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +proj=helmert +x=-371 +y=112 +z=-434
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (2) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (2)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",-371,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",112,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-434,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[10.0],
+            ID["INVERSE(EPSG)",1196],
+            REMARK["Derived at 24 stations. Accuracy 5m, 5m and 6m in X, Y and Z axes."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[10],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - England onshore."],
+        BBOX[49.81,-6.5,55.85,1.84]]]
+
+-------------------------------------
+Operation No. 5:
+
+unknown id, Inverse of OSGB36 to WGS 84 (3) + British National Grid, 21 m, United Kingdom (UK) - England and Wales; Isle of Man - onshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +proj=helmert +x=-371 +y=111 +z=-434
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (3) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (3)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",-371,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",111,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-434,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[21.0],
+            ID["INVERSE(EPSG)",1197],
+            REMARK["Derived at 25 stations. Accuracy 10m, 10m and 15m in X, Y and Z axes."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[21],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - England and Wales; Isle of Man - onshore."],
+        BBOX[49.81,-6.5,55.85,1.84]]]
+
+-------------------------------------
+Operation No. 6:
+
+unknown id, Inverse of OSGB36 to WGS 84 (4) + British National Grid, 18 m, United Kingdom (UK) - Scotland (including Orkney and Shetland Islands), onshore and nearshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +proj=helmert +x=-384 +y=111 +z=-425
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (4) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (4)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",-384,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",111,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-425,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[18.0],
+            ID["INVERSE(EPSG)",1198],
+            REMARK["Derived at 13 stations. Accuracy 10m in each axis."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[18],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - Scotland (including Orkney and Shetland Islands), onshore and nearshore."],
+        BBOX[54.57,-8.74,60.9,-0.65]]]
+
+-------------------------------------
+Operation No. 7:
+
+unknown id, Inverse of OSGB36 to WGS 84 (5) + British National Grid, 35 m, United Kingdom (UK) - Wales onshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +proj=helmert +x=-370 +y=108 +z=-434
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (5) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (5)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",-370,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",108,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-434,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[35.0],
+            ID["INVERSE(EPSG)",1199],
+            REMARK["Derived at 3 stations. Accuracy 20m in each axis."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[35],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - Wales onshore."],
+        BBOX[51.28,-5.34,53.48,-2.65]]]
+
+-------------------------------------
+Operation No. 8:
+
+unknown id, Inverse of OSGB36 to WGS 84 (8) + British National Grid, 3 m, United Kingdom (UK) - Wytch Farm area - onshore and offshore.
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=push +v_3
+  +step +proj=cart +ellps=WGS84
+  +step +proj=helmert +x=-370.936 +y=108.938 +z=-435.682
+  +step +inv +proj=cart +ellps=airy
+  +step +proj=pop +v_3
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Inverse of OSGB36 to WGS 84 (8) + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Inverse of OSGB36 to WGS 84 (8)",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geocentric translations (geog2D domain)",
+                ID["EPSG",9603]],
+            PARAMETER["X-axis translation",-370.936,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8605]],
+            PARAMETER["Y-axis translation",108.938,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8606]],
+            PARAMETER["Z-axis translation",-435.682,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8607]],
+            OPERATIONACCURACY[3.0],
+            ID["INVERSE(EPSG)",5622],
+            REMARK["Derived by CGG for 1994 3D seismic survey."]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    OPERATIONACCURACY[3],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["United Kingdom (UK) - Wytch Farm area - onshore and offshore."],
+        BBOX[50.53,-2.2,50.8,-1.68]]]
+
+-------------------------------------
+Operation No. 9:
+
+unknown id, Ballpark geographic offset from WGS 84 to OSGB36 + British National Grid, unknown accuracy, World, has ballpark transformation
+
+PROJ string:
++proj=pipeline
+  +step +proj=axisswap +order=2,1
+  +step +proj=unitconvert +xy_in=deg +xy_out=rad
+  +step +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000
+        +ellps=airy
+
+WKT2:2019 string:
+CONCATENATEDOPERATION["Ballpark geographic offset from WGS 84 to OSGB36 + British National Grid",
+    SOURCECRS[
+        GEOGCRS["WGS 84",
+            ENSEMBLE["World Geodetic System 1984 ensemble",
+                MEMBER["World Geodetic System 1984 (Transit)"],
+                MEMBER["World Geodetic System 1984 (G730)"],
+                MEMBER["World Geodetic System 1984 (G873)"],
+                MEMBER["World Geodetic System 1984 (G1150)"],
+                MEMBER["World Geodetic System 1984 (G1674)"],
+                MEMBER["World Geodetic System 1984 (G1762)"],
+                MEMBER["World Geodetic System 1984 (G2139)"],
+                MEMBER["World Geodetic System 1984 (G2296)"],
+                ELLIPSOID["WGS 84",6378137,298.257223563,
+                    LENGTHUNIT["metre",1]],
+                ENSEMBLEACCURACY[2.0]],
+            PRIMEM["Greenwich",0,
+                ANGLEUNIT["degree",0.0174532925199433]],
+            CS[ellipsoidal,2],
+                AXIS["geodetic latitude (Lat)",north,
+                    ORDER[1],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                AXIS["geodetic longitude (Lon)",east,
+                    ORDER[2],
+                    ANGLEUNIT["degree",0.0174532925199433]],
+            ID["EPSG",4326]]],
+    TARGETCRS[
+        PROJCRS["OSGB36 / British National Grid",
+            BASEGEOGCRS["OSGB36",
+                DATUM["Ordnance Survey of Great Britain 1936",
+                    ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                        LENGTHUNIT["metre",1]]],
+                PRIMEM["Greenwich",0,
+                    ANGLEUNIT["degree",0.0174532925199433]],
+                ID["EPSG",4277]],
+            CONVERSION["British National Grid",
+                METHOD["Transverse Mercator",
+                    ID["EPSG",9807]],
+                PARAMETER["Latitude of natural origin",49,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8801]],
+                PARAMETER["Longitude of natural origin",-2,
+                    ANGLEUNIT["degree",0.0174532925199433],
+                    ID["EPSG",8802]],
+                PARAMETER["Scale factor at natural origin",0.9996012717,
+                    SCALEUNIT["unity",1],
+                    ID["EPSG",8805]],
+                PARAMETER["False easting",400000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8806]],
+                PARAMETER["False northing",-100000,
+                    LENGTHUNIT["metre",1],
+                    ID["EPSG",8807]]],
+            CS[Cartesian,2],
+                AXIS["(E)",east,
+                    ORDER[1],
+                    LENGTHUNIT["metre",1]],
+                AXIS["(N)",north,
+                    ORDER[2],
+                    LENGTHUNIT["metre",1]],
+            ID["EPSG",27700]]],
+    STEP[
+        COORDINATEOPERATION["Ballpark geographic offset from WGS 84 to OSGB36",
+            SOURCECRS[
+                GEOGCRS["WGS 84",
+                    ENSEMBLE["World Geodetic System 1984 ensemble",
+                        MEMBER["World Geodetic System 1984 (Transit)"],
+                        MEMBER["World Geodetic System 1984 (G730)"],
+                        MEMBER["World Geodetic System 1984 (G873)"],
+                        MEMBER["World Geodetic System 1984 (G1150)"],
+                        MEMBER["World Geodetic System 1984 (G1674)"],
+                        MEMBER["World Geodetic System 1984 (G1762)"],
+                        MEMBER["World Geodetic System 1984 (G2139)"],
+                        MEMBER["World Geodetic System 1984 (G2296)"],
+                        ELLIPSOID["WGS 84",6378137,298.257223563,
+                            LENGTHUNIT["metre",1]],
+                        ENSEMBLEACCURACY[2.0]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4326]]],
+            TARGETCRS[
+                GEOGCRS["OSGB36",
+                    DATUM["Ordnance Survey of Great Britain 1936",
+                        ELLIPSOID["Airy 1830",6377563.396,299.3249646,
+                            LENGTHUNIT["metre",1]]],
+                    PRIMEM["Greenwich",0,
+                        ANGLEUNIT["degree",0.0174532925199433]],
+                    CS[ellipsoidal,2],
+                        AXIS["geodetic latitude (Lat)",north,
+                            ORDER[1],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                        AXIS["geodetic longitude (Lon)",east,
+                            ORDER[2],
+                            ANGLEUNIT["degree",0.0174532925199433]],
+                    ID["EPSG",4277]]],
+            METHOD["Geographic2D offsets",
+                ID["EPSG",9619]],
+            PARAMETER["Latitude offset",0,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8601]],
+            PARAMETER["Longitude offset",0,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8602]]]],
+    STEP[
+        CONVERSION["British National Grid",
+            METHOD["Transverse Mercator",
+                ID["EPSG",9807]],
+            PARAMETER["Latitude of natural origin",49,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8801]],
+            PARAMETER["Longitude of natural origin",-2,
+                ANGLEUNIT["degree",0.0174532925199433],
+                ID["EPSG",8802]],
+            PARAMETER["Scale factor at natural origin",0.9996012717,
+                SCALEUNIT["unity",1],
+                ID["EPSG",8805]],
+            PARAMETER["False easting",400000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8806]],
+            PARAMETER["False northing",-100000,
+                LENGTHUNIT["metre",1],
+                ID["EPSG",8807]],
+            ID["EPSG",19916]]],
+    USAGE[
+        SCOPE["unknown"],
+        AREA["World"],
+        BBOX[-90,-180,90,180]]]
 
 ------------------------------------------------------------
 
