@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
   system("./a.out-1 41.272906 69.300666 \"Limpopo Waterpark\" > 0001_20250715_093812_waterparks/0018-limpopo.html\n");
   system("./a.out-1 39.658954 66.907896 \"Aquapark Sogdiana\" > 0001_20250715_093812_waterparks/0019-sogdiana.html\n");
   system("./a.out-1 8.781762 39.002926 \"Kuriftu Water Park\" > 0001_20250715_093812_waterparks/0020-kuriftu.html\n");
+  system("./a.out-1 -2.463644 112.448469 \"Davit KM77 Selunuk Swimming Pool\" > 0001_20250715_093812_waterparks/0021-selanuk.html\n");
   system("rm a.out-1\n");
 }
 
