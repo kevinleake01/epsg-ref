@@ -63,8 +63,9 @@ int main(int argc, char *argv[])
   printf("<br>\n");
   printf("--------------------------------------<br>\n");
   printf("NOTE: You will have to copy and paste the MGRS location into the website<br>\n");
-  printf("links listed here. Copy this to the clipboard:<br>\n");
-  printf("<input type=\"text\" value=\"%s %s %s %s\"><br>", argv[1], argv[2], argv[3], argv[4]); 
+  printf("links listed here. Copy one of the MGRS addresses to the clipboard:<br>\n");
+  printf("<input type=\"text\" value=\"%s %s %s %s\"> or ", argv[1], argv[2], argv[3], argv[4]); 
+  printf("<input type=\"text\" value=\"%s%s%s%s\"><br>", argv[1], argv[2], argv[3], argv[4]); 
   printf("<br>\n");
   printf("<a href=\"https://caltopo.com/map.html\">CalTopo</a><br>\n");
   printf("<a href=\"https://mapscaping.com/mgrs-coordinate-converter/\">Mapscaping: MGRS Coordinate Converter</a><br>\n");
@@ -74,8 +75,11 @@ int main(int argc, char *argv[])
   printf("<a href=\"https://www.earthpoint.us/convert.aspx\">Earth Point: Convert Coordinates</a><br>\n");
   printf("<a href=\"https://www.movable-type.co.uk/scripts/latlong-utm-mgrs.html\">Movable Type: MGRS to Lat/Long</a><br>\n");
   printf("<a href=\"https://easycalculator.org/military-grid-reference-system-converter\">Easy Calculator: MGRS Coordinate Converter</a><br>\n");
-  printf("<a href=\"https://nicholas-fong.github.io/mgrs/mgrs.html\">Nicholas Fong: Convert MGRS to Latitude Longitude</a><br>\n");
+  printf("<a href=\"https://nicholas-fong.github.io/mgrs/mgrs.html\">Nicholas Fong: Convert MGRS to Latitude Longitude #1</a><br>\n");
+  printf("<a href=\"https://nicholas-fong.github.io/mgrsX/mgrsX.html\">Nicholas Fong: Convert MGRS to Latitude Longitude #2</a><br>\n");
   printf("<a href=\"https://pjobson.github.io/bulk-coordinate-converter/\">Bulk Coordinate Conversion</a><br>\n");
+  printf("<a href=\"https://www.cachesleuth.com/batchconvertcoordinates.html\">CacheSleuth: Batch Coordinate Converter</a><br>\n");
+  printf("<a href=\"https://products.aspose.app/gis/coordinates\">Aspose: Geo Coordinates Parser and Converter</a><br>\n");
   printf("</p>\n");
   printf("</body>\n");
   printf("</html>\n");
