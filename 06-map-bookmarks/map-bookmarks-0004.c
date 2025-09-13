@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
   printf("<br>\n");
   printf("--------------------------------------<br>\n");
   printf("NOTE: You will have to copy and paste the Open Location Plus Code into the website<br>\n");
-  printf("links listed here. Copy this to the clipboard:<br>\n");
+  printf("links listed below. Copy this to the clipboard:<br>\n");
   printf("<input type=\"text\" value=\"%s+%s\"><br>", argv[1], argv[2]); 
   printf("<br>\n");
   printf("<a href=\"https://www.dcode.fr/open-location-code\">Dcode.fr: Open Location Code</a><br>\n");

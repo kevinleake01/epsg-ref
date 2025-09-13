@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
   printf("<br>\n");
   printf("--------------------------------------<br>\n");
   printf("NOTE: You will have to copy and paste the Mapcode location into the website<br>\n");
-  printf("links listed here. Copy this to the clipboard:<br>\n");
+  printf("links listed below. Copy this to the clipboard:<br>\n");
   printf("<input type=\"text\" value=\"%s %s.%s\"><br>", argv[1], argv[2], argv[3]); 
   printf("<br>\n");
   printf("<a href=\"https://s3.eu-central-1.amazonaws.com/download.mapcode.com/getcoordst.html\">Mapcode Map: Google</a><br>\n");
