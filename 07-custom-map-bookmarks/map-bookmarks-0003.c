@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
   printf("<br>\n");
   printf("--------------------------------------<br>\n");
   printf("NOTE: You will have to copy and paste the MGRS location into the website<br>\n");
-  printf("links listed here. Copy one of the MGRS addresses to the clipboard:<br>\n");
+  printf("links listed below. Copy one of the MGRS addresses to the clipboard:<br>\n");
   printf("<input type=\"text\" value=\"%s %s %s %s\"> or ", argv[1], argv[2], argv[3], argv[4]); 
   printf("<input type=\"text\" value=\"%s%s%s%s\"><br>", argv[1], argv[2], argv[3], argv[4]); 
   printf("<br>\n");

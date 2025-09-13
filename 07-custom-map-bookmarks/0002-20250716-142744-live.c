@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   system("./a.out-1 PRT BHZ D5 \"Algarve\" > 0002_20250716_142744_live/0005-algarve.html\n");
   system("./a.out-1 MX-ROO X2 6TN \"Isla De Mujeres\" > 0002_20250716_142744_live/0006-mujeres.html\n");
   system("./a.out-1 MX-JAL 14M 5H \"Puerto Vallarta\" > 0002_20250716_142744_live/0007-puerto-vallarta.html\n");
-  system("./a.out-1 BLZ QYR JQ \"Ambergis Caye\" > 0002_20250716_142744_live/0008-ambergis.html\n");
+  system("./a.out-1 BLZ QYR JQ \"Ambergris Caye\" > 0002_20250716_142744_live/0008-ambergris.html\n");
   system("./a.out-1 HND TSD WH \"Roatan\" > 0002_20250716_142744_live/0009-roatan.html\n");
   system("./a.out-1 CRI 15 HX5 \"Atenas\" > 0002_20250716_142744_live/0010-atenas.html\n");
   system("./a.out-1 PAN XH0 WL \"Coronado\" > 0002_20250716_142744_live/0011-coronado.html\n");
