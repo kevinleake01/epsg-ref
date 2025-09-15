@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
   printf("links listed below. Copy this to the clipboard:<br>\n");
   printf("<input type=\"text\" value=\"%s+%s\"><br>", argv[1], argv[2]); 
   printf("<br>\n");
+  printf("<a href=\"https://s3.eu-central-1.amazonaws.com/download.mapcode.com/getcoordst.html\">Mapcode Map: Google</a><br>\n");
   printf("<a href=\"https://www.dcode.fr/open-location-code\">Dcode.fr: Open Location Code</a><br>\n");
   printf("<a href=\"https://coordinates-converter.com/en\">Coordinates Converter</a><br>\n");
   printf("<a href=\"https://www.fdsd.co.uk/convert-coord/\">Geographical Coordinate Converter</a><br>\n");
