@@ -1,0 +1,19 @@
+UTM-MAP-BOOKMARKS-0001 and UTM-MAP-BOOKMARKS-0002 are Map Bookmarks using the
+Universal Transverse Mercator.
+
+UTM-MAP-BOOKMARKS-0001.C uses MGRS Style Latitude bands C to X and
+UTM-MAP-BOOKMARKS-0002.C simply uses North or South.
+
+Here are some examples:
+
+$ gcc utm-map-bookmarks-0001.c
+$ ./a.out 30U 708216 5707226 "Royal Observatory Greenwich, London" > royal-observatory-greenwich.html
+  or
+$ gcc utm-map-bookmarks-0002.c
+$ ./a.out 30 n 708216 5707226 "Royal Observatory Greenwich, London" > royal-observatory-greenwich.html
+
+will set up map-bookmarks for the Royal Observatory Greenwich, London. The EPSG-REF for this location
+using UTM is:
+
+  EPSG:32630: 708216 5707226
+
