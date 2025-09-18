@@ -53,11 +53,6 @@ int main(int argc, char *argv[])
   printf("<h1>EPSG-REF UTM Map Bookmarks 0001<br>using MGRS Style Latitude bands C to X</h1>\n");
   printf("<h2>For %s<br>at UTM: %s %s %s</h2>\n", argv[4], argv[1], argv[2], argv[3]);
   printf("<p>\n");
-  printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=5&scale=meters&basemap=Open_Street_Map\">Mappingsupport GISSurfer: OpenStreetMap Zoom x5</a><br>\n", argv[1], argv[2], argv[3]);
-  printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=5&scale=meters&basemap=Open_Topo_Map\">Mappingsupport GISSurfer: OpenTopoMap Zoom x5</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
-  printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=5&scale=meters&basemap=ESRI_aerial_clarity\">Mappingsupport GISSurfer: ESRI Aerial Clarity Zoom x5</a><br>\n", argv[1], argv[2], argv[3]);
-  printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=5&scale=meters&basemap=ESRI_aerial_newer\">Mappingsupport GISSurfer: ESRI Aerial Newer Zoom x5</a><br>\n", argv[1], argv[2], argv[3]);
-  printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=5&scale=meters&basemap=ESRI_navigation\">Mappingsupport GISSurfer: ESRI Navigation Zoom x5</a><br>\n", argv[1], argv[2], argv[3]);
   printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=10&scale=meters&basemap=Open_Street_Map\">Mappingsupport GISSurfer: OpenStreetMap Zoom x10</a><br>\n", argv[1], argv[2], argv[3]);
   printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=10&scale=meters&basemap=Open_Topo_Map\">Mappingsupport GISSurfer: OpenTopoMap Zoom x10</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
   printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s_%s_%s&zoom=10&scale=meters&basemap=ESRI_aerial_clarity\">Mappingsupport GISSurfer: ESRI Aerial Clarity Zoom x10</a><br>\n", argv[1], argv[2], argv[3]);
