@@ -57,6 +57,9 @@ int main(int argc, char *argv[])
   printf("<a href=\"https://epsg.io/map#srs=5048&x=%s&y=%s&z=10&layer=streets\">Epsg.io Map: Streets - Zoom x10</a><br>\n", argv[2], argv[1]);
   printf("<a href=\"https://epsg.io/map#srs=5048&x=%s&y=%s&z=10&layer=satellite\">Epsg.io Map: Satellite - Zoom x10</a><br>\n", argv[2], argv[1]);
   printf("<a href=\"https://epsg.io/map#srs=5048&x=%s&y=%s&z=10&layer=osm\">Epsg.io Map: Maptiler OSM - Zoom x10</a><br>\n", argv[2], argv[1]);
+  printf("<a href=\"https://epsg.io/map#srs=5048&x=%s&y=%s&z=15&layer=streets\">Epsg.io Map: Streets - Zoom x15</a><br>\n", argv[2], argv[1]);
+  printf("<a href=\"https://epsg.io/map#srs=5048&x=%s&y=%s&z=15&layer=satellite\">Epsg.io Map: Satellite - Zoom x15</a><br>\n", argv[2], argv[1]);
+  printf("<a href=\"https://epsg.io/map#srs=5048&x=%s&y=%s&z=15&layer=osm\">Epsg.io Map: Maptiler OSM - Zoom x15</a><br>\n", argv[2], argv[1]);
   printf("</p>\n");
   printf("</body>\n");
   printf("</html>\n");

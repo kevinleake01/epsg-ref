@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   printf("</style>\n");
   printf("</head>\n");
   printf("<body>\n");
-  printf("<h1>EPSG-REF Map Bookmarks 0002</h1>\n");
+  printf("<h1>EPSG-REF Map Bookmarks 0002<br>using Mapcodes from The Mapcode Foundation</h1>\n");
   printf("<h2>For %s<br>at Mapcode: %s %s.%s</h2>\n", argv[4], argv[1], argv[2], argv[3]);
   printf("<p>\n");
   printf("<a href=\"https://api.mapcode.com/mapcode/xml/coords/%s%%20%s.%s\">Mapcode REST-API XML</a><br>\n", argv[1], argv[2], argv[3]);

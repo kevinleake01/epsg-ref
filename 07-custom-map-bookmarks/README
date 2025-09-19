@@ -2,4 +2,15 @@
 
 Here are some customized Map-Bookmarks for you to enjoy! :-)
 
+The list of bookmarks is as follows:
+
+  map-bookmarks-0001.c  -- Latitude and Longitude (Decimal)
+  map-bookmarks-0002.c  -- Mapcodes
+  map-bookmarks-0003.c  -- MGRS
+  map-bookmarks-0004.c  -- Open Location Plus codes (Google)
+  map-bookmarks-0005.c  -- OpenStreetMap Shortlink Codes
+  map-bookmarks-0006.c  -- Google Shortlink Codes
+  map-bookmarks-0007.c  -- Mapy.com Shortlink Codes
+  map-bookmarks-0008.c  -- Yandex Maps Shortlink Codes
+  map-bookmarks-0009.c  -- Epsg.io
 

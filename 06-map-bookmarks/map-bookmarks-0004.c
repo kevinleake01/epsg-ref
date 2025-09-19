@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
   printf("</style>\n");
   printf("</head>\n");
   printf("<body>\n");
-  printf("<h1>EPSG-REF Map Bookmarks 0004</h1>\n");
+  printf("<h1>EPSG-REF Map Bookmarks 0004<br>using Open Location Plus Codes from Google</h1>\n");
   printf("<h2>For %s<br>at Open Location Plus Code: %s+%s</h2>\n", argv[3], argv[1], argv[2]);
   printf("<p>\n");
   printf("<a href=\"https://plus.codes/%s%%2B%s\">Plus Codes Map</a><br>\n", argv[1], argv[2]);
