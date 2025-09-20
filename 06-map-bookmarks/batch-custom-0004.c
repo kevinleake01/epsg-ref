@@ -3,7 +3,7 @@
 #
 # --- BATCH-CUSTOM-0004.C ---
 #
-# This Open Location Plus Codes. Please edit this file to suit your needs.
+# This uses Open Location Plus Codes. Please edit this file to suit your needs.
 #
 # To run this program:
 #
