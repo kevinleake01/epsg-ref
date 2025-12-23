@@ -9,9 +9,9 @@ The format to using EPSG-REF is this:
 <n> --- EPSG number to use
 <x> --- X Co-ordinates (usually Eastings)
 <y> --- Y Co-ordinates (usually Northings)
-<z> --- Z (Altitude or Height - This is optional, and will depend on the EPSG number that is used)
+<z> --- Z (Altitude or Height - This will depend on the EPSG number that is used)
 
-The EPSG:<n>: <x> <y> <z> are separated by whitespaces, usually [SPACE] or [TAB].
+The EPSG:<n>: <x> <y> <z> are separated by whitespaces, usually [SPACE], [TAB] or [NEWLINE].
 
 ------------------------------------------------------------
 
@@ -29,6 +29,14 @@ EPSG:3042: 5707226 708216       (ETRS89 UTM Zone 30N (N-E))
 EPSG:8857: -115 6133426         (Equal Earth Greenwich)
 EPSG:8858: 7032899 6133426      (Equal Earth Americas)
 EPSG:8859: -11721806 6133426    (Equal Earth Asia-Pacific)
+
+------------------------------------------------------------
+
+An example of EPSG-REF using [NEWLINE]:
+
+EPSG:27700:
+538885
+177322
 
 ------------------------------------------------------------
 
@@ -91,7 +99,7 @@ the same co-ordinates. This is technically wrong, and you may have to do an X,Y 
 
 ------------------------------------------------------------
 
-You should install Proj-data, as this gives greater accuracy. Proj-data is used in Proj, Gdal, and QGIS.
+You should install Proj-data, as this gives greater accuracy. Proj-data is used in Proj, GDAL, and QGIS.
 
 To download and install, do this:
 

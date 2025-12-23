@@ -1,0 +1,66 @@
+Examples using newlines in EPSG-REF:
+
+------------------------------------
+The Royal Observatory in Greenwich, London:
+
+EPSG:27700:
+538885
+177322
+
+------------------------------------
+Festplassen, Bergen, Norway:
+
+EPSG:25831:
+628193
+6697220
+
+------------------------------------
+Zurich Hauptbahnhof, Switzerland:
+
+EPSG:2056:
+2683124
+1248067
+
+------------------------------------
+Ala Moana Beach, Honolulu, Hawaii:
+
+EPSG:26963:
+515715
+13599
+
+------------------------------------
+Singapore Changi Airport:
+
+EPSG:3414:
+37732
+45259
+
+------------------------------------
+Santa Maria, Sal, Cape Verde:
+
+EPSG:4826:
+278145
+213400
+
+------------------------------------
+Greenmarket Square, Cape Town, South Africa:
+
+EPSG:2048:
+53626
+3755240
+
+------------------------------------
+Manly Beach, Sydney, NSW, Australia:
+
+EPSG:7856:
+341527
+6259020
+
+------------------------------------
+Amundsen-Scott South Pole Station:
+
+EPSG:5042:
+2000000
+2000000
+
+------------------------------------
