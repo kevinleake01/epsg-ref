@@ -7,6 +7,12 @@ of bookmarks is as follows:
   map-bookmarks-0002.c  -- Mapcodes
   map-bookmarks-0003.c  -- MGRS
   map-bookmarks-0004.c  -- Open Location Plus codes (Google)
+  map-bookmarks-0005.c  -- OpenStreetMap Shortlink Codes
+  map-bookmarks-0006.c  -- Google Shortlink Codes
+  map-bookmarks-0007.c  -- Mapy.com Shortlink Codes
+  map-bookmarks-0008.c  -- Yandex Maps Shortlink Codes
+  map-bookmarks-0009.c  -- Epsg.io
+
 
 
 You can also do a batch processing of Map Bookmarks:
@@ -15,6 +21,12 @@ You can also do a batch processing of Map Bookmarks:
   batch-0002.c  -- Mapcodes
   batch-0003.c  -- MGRS
   batch-0004.c  -- Open Location Plus codes (Google)
+  batch-0005.c  -- OpenStreetMap Shortlink Codes
+  batch-0006.c  -- Google Shortlink Codes
+  batch-0007.c  -- Mapy.com Shortlink Codes
+  batch-0008.c  -- Yandex Maps Shortlink Codes
+  batch-0009.c  -- Epsg.io
+
 
 These batch map-bookmarks have been predefined to compass points, but
 you can define your own set of batch map-bookmarks by editing the files
@@ -24,4 +36,10 @@ below to suit your needs:
   batch-custom-0002.c  -- Mapcodes
   batch-custom-0003.c  -- MGRS
   batch-custom-0004.c  -- Open Location Plus codes (Google)
+  batch-custom-0005.c  -- OpenStreetMap Shortlink Codes
+  batch-custom-0006.c  -- Google Shortlink Codes
+  batch-custom-0007.c  -- Mapy.com Shortlink Codes
+  batch-custom-0008.c  -- Yandex Maps Shortlink Codes
+  batch-custom-0009.c  -- Epsg.io
+
 
