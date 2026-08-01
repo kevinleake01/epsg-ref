@@ -1,0 +1,53 @@
+-----------------------------------------------------
+----- OTHER GEOCODES USING BASE32 AND BASE64URL -----
+-----------------------------------------------------
+
+Here are some examples of using other geocodes converted to
+Base32 and Base64url to make them URL and filename safe:
+
+----------------------------------------------------
+--- MAPCODES ---
+
+Mapcode:  GBR 762.0HW
+
+Mapcode-Base32:  I5BFEIBXGYZC4MCIK4======
+Mapcode-Base64url:  R0JSIDc2Mi4wSFc
+
+
+Mapcode:  GBR 762.0HW-BTL2
+
+Mapcode-Base32:  I5BFEIBXGYZC4MCIK4WUEVCMGI======
+Mapcode-Base64url:  R0JSIDc2Mi4wSFctQlRMMg
+
+-----------------------------------------------------
+--- MGRS ---
+
+MGRS:  30U YC 08215 07225
+
+MGRS-Base32:  GMYFKICZIMQDAOBSGE2SAMBXGIZDK===
+MGRS-Base64url:  MzBVIFlDIDA4MjE1IDA3MjI1
+
+Note: The MGRS version without spaces (30UYC0821507225) is URL and filename safe.
+
+-----------------------------------------------------
+--- PLUS CODES (OLC) ---
+
+OLC:  9C2WWGQG+8W
+
+OLC-Base32:  HFBTEV2XI5IUOKZYK4======
+OLC-Base64url:  OUMyV1dHUUcrOFc
+
+Note: You can also make Plus Codes URL and filename safe by changing the Plus '+'
+to Minus '-', similar to converting base64 to Base64url. (Example: 9C2WWGQG-8W)
+
+-----------------------------------------------------
+--- H3 ---
+
+H3:  8f195911b866064
+
+H3-Base32:  HBTDCOJVHEYTCYRYGY3DANRU
+H3-Base64url:  OGYxOTU5MTFiODY2MDY0
+
+Note: H3 only uses Hex numbers, so it is URL and filename safe.
+
+-----------------------------------------------------
