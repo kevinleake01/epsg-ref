@@ -59,6 +59,8 @@ int main(int argc, char *argv[])
   printf("<a href=\"https://mapy.com/en/zakladni?q=%s%%2B%s&z=15\">Mapy.com: Basic</a><br>\n", argv[1], argv[2]);
   printf("<a href=\"https://mapy.com/en/turisticka?q=%s%%2B%s&z=15\">Mapy.com: Outdoor</a><br>\n", argv[1], argv[2]);
   printf("<a href=\"https://mapy.com/en/letecka?q=%s%%2B%s&z=15\">Mapy.com: Aerial</a><br>\n", argv[1], argv[2]);
+  printf("<a href=\"https://mapy.com/en/dopravni?q=%s%%2B%s&z=15\">Mapy.com: Traffic</a><br>\n", argv[1], argv[2]);
+  printf("<a href=\"https://mapy.com/en/zimni?q=%s%%2B%s&z=15\">Mapy.com: Winter</a><br>\n", argv[1], argv[2]);
   printf("<br>\n");
   printf("--------------------------------------<br>\n");
   printf("NOTE: You will have to copy and paste the Open Location Plus Code into the website<br>\n");
@@ -70,6 +72,8 @@ int main(int argc, char *argv[])
   printf("<a href=\"https://coordinates-converter.com/en\">Coordinates Converter</a><br>\n");
   printf("<a href=\"https://www.fdsd.co.uk/convert-coord/\">Geographical Coordinate Converter</a><br>\n");
   printf("<a href=\"https://www.earthpoint.us/Convert.aspx\">Earth Point: Convert Coordinates</a><br>\n");
+  printf("<a href=\"https://mapgridder.com/map\">MapGridder</a><br>\n");
+  printf("<a href=\"https://locations.app/plus-code/\">Locations: Plus Code Converter</a><br>\n");
   printf("<a href=\"https://cvzi.github.io/open-location-code-demo/\">Demo for Open Location Codes</a><br>\n");
   printf("<a href=\"https://nicholas-fong.github.io/OpenLocationCode/openlocationcode.html\">Nicholas Fong: OpenLocationCode to GPS</a><br>\n");
   printf("<a href=\"https://9revolution9.com/tools/geo/geocode/\">Revolution9: Geocode Map Viewer</a><br>\n");

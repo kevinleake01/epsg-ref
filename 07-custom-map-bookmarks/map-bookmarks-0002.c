@@ -63,8 +63,9 @@ int main(int argc, char *argv[])
   printf("links listed below. Copy this to the clipboard:<br>\n");
   printf("<input type=\"text\" value=\"%s %s.%s\"><br>", argv[1], argv[2], argv[3]); 
   printf("<br>\n");
-  printf("<a href=\"https://www.mapcode.com/en/demo\">Mapcode Map Demo</a><br>\n");
+  printf("<a href=\"https://www.mapcode.com/en/demo/\">Mapcode Map Demo</a><br>\n");
   printf("<a href=\"https://plan.tomtom.com/\">General TomTom Map</a><br>\n");
+  printf("<a href=\"https://matlads.github.io/Leaflet.Mapcodes/\">Matlads Leaflet Mapcodes</a><br>\n");
   printf("</p>\n");
   printf("</body>\n");
   printf("</html>\n");

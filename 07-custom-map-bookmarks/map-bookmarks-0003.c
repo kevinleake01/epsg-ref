@@ -54,6 +54,11 @@ int main(int argc, char *argv[])
   printf("<h2>For %s<br>at MGRS: %s %s %s %s</h2>\n", argv[5], argv[1], argv[2], argv[3], argv[4]);
   printf("<p>\n");
   printf("<a href=\"https://geographiclib.sourceforge.io/cgi-bin/GeoConvert?input=%s%s%s%s\">GeographicLib Geoconvert</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
+  printf("<a href=\"https://mapy.com/en/zakladni?q=%s%s%s%s&z=15\">Mapy.com: Basic</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
+  printf("<a href=\"https://mapy.com/en/turisticka?q=%s%s%s%s&z=15\">Mapy.com: Outdoor</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
+  printf("<a href=\"https://mapy.com/en/letecka?q=%s%s%s%s&z=15\">Mapy.com: Aerial</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
+  printf("<a href=\"https://mapy.com/en/dopravni?q=%s%s%s%s&z=15\">Mapy.com: Traffic</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
+  printf("<a href=\"https://mapy.com/en/zimni?q=%s%s%s%s&z=15\">Mapy.com: Winter</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
   printf("<a href=\"https://www.simplegrg.com/?grid=%s%s%s%s\">Simple GRG</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
   printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s%s%s%s&zoom=10&scale=meters&basemap=Open_Street_Map\">Mappingsupport GISSurfer: OpenStreetMap Zoom x10</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
   printf("<a href=\"https://mappingsupport.com/p2/gissurfer.php?center=%s%s%s%s&zoom=10&scale=meters&basemap=Open_Topo_Map\">Mappingsupport GISSurfer: OpenTopoMap Zoom x10</a><br>\n", argv[1], argv[2], argv[3], argv[4]);
@@ -77,7 +82,11 @@ int main(int argc, char *argv[])
   printf("<a href=\"https://legallandconverter.com/p50.html\">Legal Land Converter: MGRS / USNG to Latitude and Longitude</a><br>\n");
   printf("<a href=\"https://dominoc925-pages.appspot.com/mapplets/cs_mgrs.html\">Dominoc925: MGRS</a><br>\n");
   printf("<a href=\"https://hawg-ops.com/\">Hawg View</a><br>\n");
+  printf("<a href=\"https://mgrsconverter.com/\">MGRSConverter.com</a><br>\n");				
+  printf("<a href=\"https://www.latlonics.com/tools/mgrs-grid\">LatLonics</a><br>\n");
   printf("<a href=\"https://www.earthpoint.us/convert.aspx\">Earth Point: Convert Coordinates</a><br>\n");
+  printf("<a href=\"https://mapgridder.com/map\">MapGridder</a><br>\n");
+  printf("<a href=\"https://locations.app/coordinate-converter/\">Locations: Coordinate Converter</a><br>\n");
   printf("<a href=\"https://www.movable-type.co.uk/scripts/latlong-utm-mgrs.html\">Movable Type: MGRS to Lat/Long</a><br>\n");
   printf("<a href=\"https://easycalculator.org/military-grid-reference-system-converter\">Easy Calculator: MGRS Coordinate Converter</a><br>\n");
   printf("<a href=\"https://nicholas-fong.github.io/mgrs/mgrs.html\">Nicholas Fong: Convert MGRS to Latitude Longitude #1</a><br>\n");
