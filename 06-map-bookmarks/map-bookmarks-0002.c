@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
   printf("<br>\n");
   printf("<a href=\"https://www.mapcode.com/en/demo/\">Mapcode Map Demo</a><br>\n");
   printf("<a href=\"https://plan.tomtom.com/\">General TomTom Map</a><br>\n");
+  printf("<a href=\"https://matlads.github.io/Leaflet.Mapcodes/\">Matlads Leaflet Mapcodes</a><br>\n");
   printf("</p>\n");
   printf("</body>\n");
   printf("</html>\n");
