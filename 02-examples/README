@@ -4,13 +4,19 @@ Here are some examples of locations using EPSG-REFs. Please note that there are 
 many EPSG-REFs to list here, and you can see the full list at:
 
   https://crs-explorer.proj.org/
+  https://spatialreference.org/
 
 ------------------------------------
 
-Just as a matter of interest, we have also included Mapcodes for that location. To
-find out more go to:
+Just as a matter of interest, we have also included MGRS, Open Location Plus Codes,
+and Local and International Mapcodes for that location. To find out more:
 
-  https://mapcode.com/
+MGRS:
+https://en.wikipedia.org/wiki/Military_Grid_Reference_System
 
+Open Location Plus Codes:
+https://maps.google.com/pluscodes/
 
+Mapcodes:
+https://www.mapcode.com/en/
 
